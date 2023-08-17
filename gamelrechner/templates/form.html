@@ -1,3 +1,6 @@
+<
+
+<h1> {{gender}} </h1>
 <form class="form-horizontal" method="POST" action="result/">
     {% csrf_token %}
     <fieldset>
@@ -41,7 +44,9 @@
       </div>
     </div>
     
+    {% if gender == 'male' %} 
     <!-- Multiple Radios (inline) -->
+    <img src="https://bodyboostpro.co.nz/site/file/user/5/uploads/image/male%20body%20fat-MnhY8.png" height='400' alt="Italian Trulli">
     <div class="form-group">
       <label class="col-md-4 control-label" for="radios">Bodyfat percentage</label>
       <div class="col-md-4"> 
@@ -67,6 +72,7 @@
         </label>
       </div>
     </div>
+    {% endif %}
     
     <!-- Text input-->
     <div class="form-group">
@@ -80,7 +86,8 @@
     <!-- Multiple Radios (inline) -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="hair">Hair</label>
-      <div class="col-md-4"> 
+      <div class="col-md-4">
+        {% if gender == 'male' %} 
         <label class="radio-inline" for="radios-0">
           <input type="radio" name="hair" id="radios-0" value="1" checked="checked">
           Normal
@@ -93,12 +100,30 @@
           <input type="radio" name="hair" id="radios-2" value="3">
           Bald
         </label>
+        {% endif %}
+        {% if gender == 'female' %} 
+        <label class="radio-inline" for="radios-0">
+          <input type="radio" name="hair" id="radios-0" value="1" checked="checked">
+          Long
+        </label> 
+        <label class="radio-inline" for="radios-1">
+          <input type="radio" name="hair" id="radios-1" value="2">
+          Short
+        </label>
+        <label class="radio-inline" for="radios-2">
+          <input type="radio" name="hair" id="radios-2" value="3">
+          Bald
+        </label>
+      {% endif %}
       </div>
+
+
     </div>
     
+    {% if gender == 'male' %}
     <!-- Multiple Checkboxes (inline) -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="checkboxes">Beard</label>
+      <label class="col-md-4 control-label" for="beard">Beard</label>
       <div class="col-md-4">
         <label class="checkbox-inline" for="checkboxes-0">
           <input type="checkbox" name="beard" id="checkboxes-0" value="1">
@@ -106,12 +131,13 @@
         </label>
       </div>
     </div>
+    {% endif %}
     
     <!-- Button -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
       <div class="col-md-4">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary" type"submit">KeckButton</button>
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary" type"submit">Berechne</button>
       </div>
     </div>
     
