@@ -17,31 +17,33 @@ def result(request, gender):
     hair = int(request.POST['hair'])
     beard = int(request.POST.get('beard', 0))
     age = int(request.POST['age'])
+    jewlery = 0
 
-    print(getPzAge(age))
+    for i in range(1,7):
+        jewlery += int(request.POST.get("jewlery" + str(i), 0))
+
+
     punktzahl += getPzAge(age)
 
-    print(getPzHeight(height, gender))
     punktzahl += getPzHeight(height, gender)
 
-    print("doggy")
-    print(getPzBmi(height, weight, gender))
     punktzahl += getPzBmi(height, weight, gender)
 
     if gender != 'female':
-        print(getPzBfp(request.POST['radios']))
         punktzahl += getPzBfp(request.POST['radios'])
 
-        print(getPzBeard(beard))
         punktzahl += getPzBeard(beard)
 
+    else:
+        punktzahl += getPzBodyType(request.POST['radios'])
+
+        punktzahl += getPzJewlery(jewlery)
 
 
-    print(getPzIq(iq))
+
     punktzahl += getPzIq(iq)
 
-    print(getPzHair(hair))
-    punktzahl += getPzHair(hair)
+    punktzahl += getPzHair(hair, gender)
 
 
 
@@ -120,6 +122,16 @@ def getPzBfp(bpf):
     elif bpf == '2':
         return 10
     
+def getPzBodyType(bd):
+    if bd == '5':
+        return 2
+    elif bd == '1':
+        return 5
+    elif bd == '4' or bd == '2':
+        return 8
+    elif bd == '3':
+        return 10
+
 def getPzIq(iq):
     if iq < 70:
         return 0
@@ -155,3 +167,13 @@ def getPzBeard(beard):
         return 3
     else:
         return 0
+
+def getPzJewlery(jewlery):
+    if jewlery < 1 or jewlery > 5:
+        return 0
+    elif jewlery == 1 or jewlery == 5:
+        return 1
+    elif jewlery == 2 or jewlery == 4:
+        return 2
+    elif jewlery == 3:
+        return 3
